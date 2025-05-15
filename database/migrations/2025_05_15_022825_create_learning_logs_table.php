@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text('summary')->nullable();
             $table->unsignedInteger('duration')->nullable();
             $table->longText('resources')->nullable();
-            $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->foreignId('task_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

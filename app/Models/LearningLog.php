@@ -26,11 +26,6 @@ class LearningLog extends Model
         'resources' => 'array',
     ];
 
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
-
     public function task()
     {
         return $this->belongsTo(Task::class);

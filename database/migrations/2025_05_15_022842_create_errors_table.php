@@ -21,7 +21,6 @@ return new class extends Migration
             $table->enum('severity', ['low', 'medium', 'high'])->default('low');
             $table->enum('status', ['unresolved', 'resolved'])->default('unresolved');
             $table->foreignId('task_id')->constrained()->onDelete('cascade');
-            $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
