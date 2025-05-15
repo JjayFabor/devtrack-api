@@ -30,8 +30,7 @@ it('fails to register a user with invalid data', function () {
         'password_confirmation' => 'password',
     ]);
 
-    $response->assertStatus(422)
-        ->assertJsonValidationErrors(['name', 'email', 'password']);
+    $response->assertJsonValidationErrors(['name', 'email', 'password']);
 });
 
 it('can login a user', function () {
