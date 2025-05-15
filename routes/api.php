@@ -18,7 +18,7 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('projects.tasks', TaskController::class);
 
         // Standalone routes for retrieving all tasks
-        Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+        Route::get('tasks', [TaskController::class, 'showAllTasks'])->name('tasks.all');
 
     });
 });
