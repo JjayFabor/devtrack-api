@@ -244,12 +244,112 @@ class ProjectController extends Controller
         return response()->json(['success' => true, 'project' => $responseData], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   /**
+    * @OA\Put(
+    *     path="/api/v1/projects/{id}",
+    *     summary="Update a project",
+    *     tags={"Projects"},
+    *     security={{"bearerAuth":{}}},
+    *     @OA\Parameter(
+    *         name="id",
+    *         in="path",
+    *         required=true,
+    *         @OA\Schema(type="integer")
+    *     ),
+    *     @OA\RequestBody(
+    *         required=true,
+    *         @OA\JsonContent(
+    *             @OA\Property(property="name", type="string", example="Updated Project Name"),
+    *             @OA\Property(property="description", type="string", example="Updated Project Description"),
+    *             @OA\Property(property="tags", type="array", @OA\Items(type="string"), example={"tag1", "tag2"}),
+    *             @OA\Property(property="github_url", type="string", example="https://github.com/TestUser/updated-repo"),
+    *             @OA\Property(property="status", type="string", example="active"),
+    *             @OA\Property(property="user_id", type="integer", example=1),
+    *             @OA\Property(property="created_at", type="string", format="date-time", example="2023-10-01T12:00:00Z"),
+    *             @OA\Property(property="updated_at", type="string", format="date-time", example="2023-10-01T12:00:00Z")
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Project updated successfully",
+    *         @OA\JsonContent(
+    *             @OA\Property(property="success", type="boolean", example=true),
+    *             @OA\Property(property="message", type="string", example="Project updated successfully."),
+    *             @OA\Property(property="project", type="object",
+    *                 @OA\Property(property="id", type="integer", example=1),
+    *                 @OA\Property(property="name", type="string", example="Updated Project Name"),
+    *                 @OA\Property(property="user_id", type="integer", example=1),
+    *                 @OA\Property(property="description", type="string", example="Updated Project Description"),
+    *                 @OA\Property(
+    *                     property="tags",
+    *                     type="array",
+    *                     @OA\Items(type="string", example={"tag1", "tag2"})
+    *                 ),
+    *                 @OA\Property(property="github_url", type="string", example="https://githyub.com/TestUser/updated-repo"),
+    *                 @OA\Property(property="status", type="string", example="active"),
+    *                 @OA\Property(
+    *                     property="created_at",
+    *                     type="string",
+    *                     format="date-time"
+    *                 ),
+    *                 @OA\Property(
+    *                     property="updated_at",
+    *                     type="string",
+    *                     format="date-time"
+    *                 )
+    *             )
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response=404,
+    *         description="Project not found",
+    *         @OA\JsonContent(
+    *             @OA\Property(property="message", type="string", example="Project not found")
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Validation error",
+    *         @OA\JsonContent(
+    *             @OA\Property(property="message", type="string", example="The given data was invalid."),
+    *             @OA\Property(
+    *                 property="errors",
+    *                 type="object",
+    *                 @OA\Property(
+    *                     property="name",
+    *                     type="array",
+    *                     @OA\Items(type="string", example="The name field is required.")
+    *                 ),
+    *                 @OA\Property(
+    *                     property="description",
+    *                     type="array",
+    *                     @OA\Items(type="string", example="The description field is required.")
+    *                 ),
+    *                 @OA\Property(
+    *                     property="status",
+    *                     type="array",
+    *                     @OA\Items(type="string", example="The selected status is invalid.")
+    *                 )
+    *             )
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response=401,
+    *         description="Unauthenticated",
+    *         @OA\JsonContent(
+    *             @OA\Property(
+    *                 property="message",
+    *                 type="string",
+    *                 example="Unauthenticated."
+    *             )
+    *         )
+    *     )
+    * )
+    * )
+    */
     public function update(Request $request, Project $project)
     {
-        $validated = $request->validate([
+        $validated = $request->validate([ 
             'name' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|required|string',
             'tags' => 'nullable|array',

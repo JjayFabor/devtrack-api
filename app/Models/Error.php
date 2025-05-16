@@ -24,12 +24,6 @@ class Error extends Model
         'project_id',
     ];
 
-    protected $casts = [
-        'code_snippet' => 'array',
-        'cause' => 'array',
-        'resolution' => 'array',
-    ];
-
     public function task()
     {
         return $this->belongsTo(Task::class);

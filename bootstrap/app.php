@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Application;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -12,8 +14,24 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+        $exceptions->render(function (ValidationException $e, $request) {
+            return response()->json([
+                'message' => $e->getMessage(),
+                'errors' => $e->errors(),
+            ], 422);
+        });
+
+        $exceptions->render(function (\Exception $e, $request) {
+            return new JsonResponse([
+                'success' => false,
+                'errors' => [
+                    'message' => $e->getMessage(),
+                ]
+            ], 404);
+        });
+
+    })
+    ->create();

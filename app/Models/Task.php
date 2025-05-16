@@ -23,13 +23,21 @@ class Task extends Model
         'project_id',
     ];
 
-    
+
+    protected $dates = [
+        'deadline',
+    ];
+
+    protected $casts = [
+        'is_recurring' => 'boolean',
+    ];
+
     public function project()
     {
         return $this->belongsTo(Project::class);
     }
 
-    public function learning_logs()
+    public function learningLogs()
     {
         return $this->hasMany(LearningLog::class);
     }
