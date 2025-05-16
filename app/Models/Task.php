@@ -37,7 +37,7 @@ class Task extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function learning_logs()
+    public function learningLogs()
     {
         return $this->hasMany(LearningLog::class);
     }
