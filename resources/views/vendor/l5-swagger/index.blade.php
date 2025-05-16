@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ $documentationTitle }}</title>
+    <title>🚀 DevTrack API - Developer Task & Learning Tracker</title>
     <link rel="stylesheet" type="text/css" href="{{ l5_swagger_asset($documentation, 'swagger-ui.css') }}">
     <link rel="icon" type="image/png" href="{{ l5_swagger_asset($documentation, 'favicon-32x32.png') }}" sizes="32x32"/>
     <link rel="icon" type="image/png" href="{{ l5_swagger_asset($documentation, 'favicon-16x16.png') }}" sizes="16x16"/>
@@ -117,6 +117,10 @@
 </head>
 
 <body @if(config('l5-swagger.defaults.ui.display.dark_mode')) id="dark-mode" @endif>
+<div style="padding: 2rem 0 1rem 0; text-align:center; background: #22223b; color: #f2e9e4; font-family: 'Segoe UI', Arial, sans-serif;">
+    <h1 style="margin:0; font-size:2.2rem; letter-spacing:1px;">🚀 DevTrack API</h1>
+    <div style="font-size:1.1rem; color:#c9ada7;">Developer Task & Learning Tracker</div>
+</div>
 <div id="swagger-ui"></div>
 
 <script src="{{ l5_swagger_asset($documentation, 'swagger-ui-bundle.js') }}"></script>

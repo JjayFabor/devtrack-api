@@ -30,4 +30,9 @@ class LearningLog extends Model
     {
         return $this->belongsTo(Task::class);
     }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }
