@@ -9,12 +9,10 @@ use App\Http\Controllers\Api\V1\ProjectController;
 use App\Http\Controllers\Api\V1\LearningLogController;
 
 Route::prefix('v1')->group(function () {
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('token', [AuthController::class, 'generateToken']);
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/me', [AuthController::class, 'me']);
-        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::get('me', [AuthController::class, 'me']);
 
         Route::apiResource('projects', ProjectController::class);
         Route::apiResource('projects.tasks', TaskController::class);
