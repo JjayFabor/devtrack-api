@@ -36,14 +36,4 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
-
-    public function learning_logs()
-    {
-        return $this->hasMany(LearningLog::class);
-    }
-
-    public function errors()
-    {
-        return $this->hasMany(Error::class);
-    }
 }
