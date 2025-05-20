@@ -394,6 +394,6 @@ class ErrorController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Error deleted successfully',
-        ], 204);
+        ], 200);
     }
 }
