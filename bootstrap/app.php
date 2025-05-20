@@ -1,10 +1,12 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Application;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Database\UniqueConstraintViolationException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,6 +17,14 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->statefulApi();
+        $middleware->trustProxies(
+            at: ['*'],
+            headers: Request::HEADER_X_FORWARDED_FOR | Request::HEADER_X_FORWARDED_HOST | Request::HEADER_X_FORWARDED_PORT | Request::HEADER_X_FORWARDED_PROTO | Request::HEADER_X_FORWARDED_AWS_ELB
+        );
+
+        $middleware->alias([
+            'api.key.throttle' => \App\Http\Middleware\ApikeyThrottle::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (ValidationException $e, $request) {
@@ -24,13 +34,36 @@ return Application::configure(basePath: dirname(__DIR__))
             ], 422);
         });
 
-        $exceptions->render(function (\Exception $e, $request) {
+        $exceptions->render(function (\Illuminate\Database\Eloquent\ModelNotFoundException $e, $request) {
             return new JsonResponse([
                 'success' => false,
                 'errors' => [
-                    'message' => $e->getMessage(),
+                    'message' => 'Resource not found.',
                 ]
             ], 404);
+        });
+
+        $exceptions->render(function (UniqueConstraintViolationException $e, $request) {
+            $uniqueFields = ['name', 'email', 'name', 'key'];
+            $field = null;
+            $value = null;
+
+            foreach ($uniqueFields as $uf) {
+                if ($request->has($uf)) {
+                    $field = $uf;
+                    $value = $request->input($uf);
+                    break;
+                }
+            }
+
+            $message = ($field && $value) ? "The $field '$value' already exists." : 'Resource already exists.';
+            return new JsonResponse([
+                'success' => false,
+                'errors' => [
+                    'message' => $message,
+                ]
+            ], 409);
+
         });
 
     })

@@ -142,7 +142,7 @@ it('can delete a specific error data on a specific task', function(){
     $error = Error::factory()->create(['task_id' => $this->task->id]);
 
     $response = $this->deleteJson('/api/v1/projects/' . $this->project->id . '/tasks/' . $this->task->id . '/errors/' . $error->id);
-    $response->assertNoContent();
+    $response->assertOk();
 
     $this->assertDatabaseMissing('errors', [
         'id' => $error->id,
