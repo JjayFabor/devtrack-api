@@ -7,30 +7,28 @@ use App\Models\Project;
 use App\Models\LearningLog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LearningLogRequest;
+use App\Http\Resources\LearningLogResource;
 
 class LearningLogController extends Controller
 {
     public function index(Project $project, Task $task)
     {
-        return response()->json([
-            'success' => true,
-            'message' => 'Learning logs retrieved successfully',
-            'learning_logs' => $task->learningLogs()->with('project')->get(),
-        ]);
+        return LearningLogResource::collection($task->learningLogs)
+            ->additional([
+                'success' => true,
+                'message' => 'Learning logs retrieved successfully',
+            ]);
     }
 
     public function store(LearningLogRequest $request, Project $project, Task $task)
     {
         $learningLog = $task->learningLogs()->create($request->all());
 
-        $responseData = $learningLog->toArray();
-        $responseData['resources'] = $learningLog->resources;
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Learning log created successfully',
-            'learning_log' => $responseData,
-        ], 201);
+        return (new LearningLogResource($learningLog))
+            ->additional([
+                'success' => true,
+                'message' => 'Learning log created successfully',
+            ]);
     }
 
     public function show(Project $project, Task $task, LearningLog $learningLog)
@@ -42,11 +40,11 @@ class LearningLogController extends Controller
             ], 404);
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Learning log retrieved successfully',
-            'learning_log' => $learningLog,
-        ]);
+        return (new LearningLogResource($learningLog))
+            ->additional([
+                'success' => true,
+                'message' => 'Learning log retrieved successfully',
+            ]);
     }
 
     public function update(LearningLogRequest $request, Project $project, Task $task,  LearningLog $learningLog)
@@ -59,11 +57,12 @@ class LearningLogController extends Controller
         }
 
         $learningLog->update($request->all());
-        return response()->json([
-            'success' => true,
-            'message' => 'Learning log updated successfully',
-            'learning_log' => $learningLog,
-        ]);
+
+        return (new LearningLogResource($learningLog))
+            ->additional([
+                'success' => true,
+                'message' => 'Learning log updated successfully',
+            ]);
     }
 
     public function destroy(Project $project, Task $task, LearningLog $learningLog)

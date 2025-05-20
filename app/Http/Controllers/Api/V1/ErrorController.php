@@ -4,29 +4,31 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Task;
 use App\Models\Error;
+use App\Models\Project;
 use App\Http\Requests\ErrorRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ErrorResource;
 
 class ErrorController extends Controller
 {
     public function index(Project $project, Task $task)
     {
-        return response()->json([
-            'success' => true,
-            'message' => 'Errors Data retrieved successfully',
-            'error_data' => $task->errors()->with('project')->get(),
-        ], 200);
+        return ErrorResource::collection($task->errors)
+            ->additional([
+                'success' => true,
+                'message' => 'Error list retrieved successfully',
+            ]);
     }
 
     public function store(ErrorRequest $request, Project $project, Task $task)
     {
         $error_data = $task->errors()->create($request->all());
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Error created successfully',
-            'error_data' => $error_data,
-        ], 201);
+        return (new ErrorResource($error_data))
+            ->additional([
+                'success' => true,
+                'message' => 'Error created successfully',
+            ]);
     }
 
     public function show(Project $project, Task $task, Error $error)
@@ -38,11 +40,11 @@ class ErrorController extends Controller
             ], 404);
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Error Data retrieved successfully',
-            'error_data' => $error,
-        ], 200);
+        return (new ErrorResource($error))
+            ->additional([
+                'success' => true,
+                'message' => 'Error retrieved successfully',
+            ]);
     }
 
     public function update(ErrorRequest $request, Project $project, Task $task, Error $error)
@@ -56,11 +58,11 @@ class ErrorController extends Controller
 
         $error->update($request->all());
 
-        return response()->json([
-            "success" => true,
-            "message" => "Error updated successfully",
-            "error_data" => $error,
-        ]);
+        return (new ErrorResource($error))
+            ->additional([
+                'success' => true,
+                'message' => 'Error updated successfully',
+            ]);
     }
 
     public function destroy(Project $project, Task $task, Error $error)

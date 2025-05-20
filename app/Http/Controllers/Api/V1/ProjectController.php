@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
+use App\Http\Resources\ProjectResource;
 
 class ProjectController extends Controller
 {
     public function index()
     {
-        return response()->json(['success' => true, 'projects' => Project::all()], 200);
+        return ProjectResource::collection(Project::all())
+            ->additional([
+                'success' => true,
+                'message' => 'Project list retrieved successfully.',
+            ]);
     }
 
     public function store(ProjectRequest $request)
@@ -20,18 +25,20 @@ class ProjectController extends Controller
         $validated['user_id'] = $request->user()->id;
         $project = Project::create($validated);
 
-        $responseData = $project->toArray();
-        $responseData['tags'] = $project->tags;
-
-        return response()->json(['success' => true, 'project' => $responseData], 201);
+        return (new ProjectResource($project))
+            ->additional([
+                'success' => true,
+                'message' => 'Project created successfully.',
+            ]);
     }
 
     public function show(Project $project)
     {
-        $responseData = $project->toArray();
-        $responseData['tags'] = $project->tags;
-
-        return response()->json(['success' => true, 'project' => $responseData], 200);
+        return (new ProjectResource($project))
+            ->additional([
+                'success' => true,
+                'message' => 'Project retrieved successfully.',
+            ]);
     }
 
     public function update(ProjectRequest $request, Project $project)
@@ -44,10 +51,11 @@ class ProjectController extends Controller
 
         $project->update($validated);
 
-        $responseData = $project->fresh()->toArray();
-        $responseData['tags'] = $project->tags;
-
-        return response()->json(['success' => true, 'message' => 'Project updated successfully.', 'project' => $responseData], 200);
+        return (new ProjectResource($project))
+            ->additional([
+                'success' => true,
+                'message' => 'Project updated successfully.',
+            ]);
     }
 
     public function destroy(Project $project)

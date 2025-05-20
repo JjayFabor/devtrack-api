@@ -6,34 +6,37 @@ use App\Models\Task;
 use App\Models\Project;
 use App\Http\Requests\TaskRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TaskResource;
 
 class TaskController extends Controller
 {
     public function index(Project $project)
     {
-        return response()->json([
-            'success' => true,
-            'message' => 'Task list retrieved successfully.',
-            'tasks' => $project->tasks
-        ], 200);
+        return TaskResource::collection($project->tasks)
+            ->additional([
+                'success' => true,
+                'message' => 'Task list retrieved successfully.',
+            ]);
     }
 
     public function showAllTasks()
     {
-        $tasks = Task::all();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'All Task list retrieved successfully.',
-            'tasks' => $tasks
-        ], 200);
+        return TaskResource::collection(Task::all())
+            ->additional([
+                'success' => true,
+                'message' => 'All tasks retrieved successfully.',
+            ]);
     }
 
     public function store(TaskRequest $request, Project $project)
     {
         $task = $project->tasks()->create($request->all());
 
-        return response()->json(['success' => true, 'message' => 'Task created successfully.', 'task' => $task], 201);
+        return (new TaskResource($task))
+            ->additional([
+                'success' => true,
+                'message' => 'Task created successfully.',
+            ]);
     }
 
     public function show(Project $project, Task $task)
@@ -42,7 +45,11 @@ class TaskController extends Controller
             return response()->json(['success' => false, 'message' => 'Task not found in this project.'], 404);
         }
 
-        return response()->json(['success' => true, 'message' => 'Task retrieved successfully.', 'task' => $task], 200);
+        return (new TaskResource($task))
+            ->additional([
+                'success' => true,
+                'message' => 'Task retrieved successfully.',
+            ]);
     }
 
     public function update(TaskRequest $request, Project $project, Task $task)
@@ -52,7 +59,11 @@ class TaskController extends Controller
         }
 
         $task->update($request->all());
-        return response()->json(['success' => true, 'message' => 'Task updated successfully.', 'task' => $task], 200);
+        return (new TaskResource($task))
+            ->additional([
+                'success' => true,
+                'message' => 'Task updated successfully.',
+            ]);
     }
 
     public function destroy(Project $project, Task $task)
