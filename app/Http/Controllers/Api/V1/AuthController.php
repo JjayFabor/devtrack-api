@@ -49,30 +49,6 @@ class AuthController extends Controller
         ], 200);
     }
 
-    /**
-     * @OA\Get(
-     *     path="/api/v1/me",
-     *     summary="Get authenticated user",
-     *     tags={"Auth"},
-     *     security={{"bearerAuth":{}}},
-     *     @OA\Response(
-     *         response=200,
-     *         description="Authenticated user data",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="user", type="object",
-     *                 @OA\Property(property="id", type="integer", example=1),
-     *                 @OA\Property(property="name", type="string", example="Test User"),
-     *                 @OA\Property(property="email", type="string", example="user@example.com"),
-     *             )
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthenticated"
-     *     )
-     * )
-     */
     public function me(Request $request)
     {
         return response()->json(['success' => true, 'user' => $request->user()], 200);
