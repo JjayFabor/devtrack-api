@@ -8,59 +8,45 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-    /**
-     * @OA\Post(
-     *     path="/api/v1/token",
-     *     summary="Generate API token for an existing user",
-     *     tags={"Auth"},
-     *     @OA\RequestBody(
-     *         required=true,
-     *         description="User credentials",
-     *         @OA\JsonContent(
-     *             required={"email","password"},
-     *             @OA\Property(property="email", type="string", format="email", example="user@example.com"),
-     *             @OA\Property(property="password", type="string", format="password", example="password123")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Token generated successfully",
-     *         @OA\JsonContent(
-     *            @OA\Property(property="success", type="boolean", example=true),
-     *            @OA\Property(property="message", type="string", example="Token generated successfully"),
-     *            @OA\Property(property="token", type="string", example="1|Xb8d5JzLQ3TvV7gE9hF2cMnNpKsWrYtZu")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Invalid credentials"
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Validation error"
-     *     )
-     * )
-     */
-    public function generateToken(Request $request)
+    public function register(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $validated['password'] = bcrypt($validated['password']);
+        $user = User::create($validated);
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User registered successfully',
+            'token' => $token,
+        ], 201);
+    }
+
+    public function login(Request $request)
+    {
+        $validated = $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
 
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !password_verify($request->password, $user->password)) {
+        if (!auth()->attempt($validated)) {
             return response()->json(['success' => false, 'message' => 'Invalid credentials'], 401);
         }
+
+        $user = auth()->user();
 
         $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([
             'success' => true,
-            'message' => 'Token generated successfully',
+            'message' => 'User logged in successfully',
             'token' => $token,
-        ], 201);
+        ], 200);
     }
 
     /**
@@ -90,5 +76,12 @@ class AuthController extends Controller
     public function me(Request $request)
     {
         return response()->json(['success' => true, 'user' => $request->user()], 200);
+    }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+
+        return response()->json(['success' => true, 'message' => 'User logged out successfully'], 200);
     }
 }
