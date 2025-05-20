@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Task;
 use App\Models\Project;
 use App\Models\LearningLog;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LearningLogRequest;
 
 class LearningLogController extends Controller
 {
@@ -19,16 +19,8 @@ class LearningLogController extends Controller
         ]);
     }
 
-    public function store(Request $request, Project $project, Task $task)
+    public function store(LearningLogRequest $request, Project $project, Task $task)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'topic' => 'required|string|max:255',
-            'summary' => 'required|string',
-            'duration' => 'required|integer',
-            'resources' => 'nullable|array',
-        ]);
-
         $learningLog = $task->learningLogs()->create($request->all());
 
         $responseData = $learningLog->toArray();
@@ -57,7 +49,7 @@ class LearningLogController extends Controller
         ]);
     }
 
-    public function update(Request $request, Project $project, Task $task,  LearningLog $learningLog)
+    public function update(LearningLogRequest $request, Project $project, Task $task,  LearningLog $learningLog)
     {
         if ($learningLog->task_id !== $task->id) {
             return response()->json([
@@ -65,14 +57,6 @@ class LearningLogController extends Controller
                 'message' => 'Learning log not found for this task.',
             ], 404);
         }
-
-        $request->validate([
-            'title' => 'sometimes|required|string|max:255',
-            'topic' => 'sometimes|required|string|max:255',
-            'summary' => 'sometimes|required|string',
-            'duration' => 'sometimes|required|integer',
-            'resources' => 'sometimes|nullable|array',
-        ]);
 
         $learningLog->update($request->all());
         return response()->json([

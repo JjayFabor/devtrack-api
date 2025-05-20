@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Task;
 use App\Models\Error;
-use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Http\Requests\ErrorRequest;
 use App\Http\Controllers\Controller;
 
 class ErrorController extends Controller
@@ -19,18 +18,8 @@ class ErrorController extends Controller
         ], 200);
     }
 
-    public function store(Request $request, Project $project, Task $task)
+    public function store(ErrorRequest $request, Project $project, Task $task)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'code_snippet' => 'nullable|string',
-            'cause' => 'nullable|string',
-            'resolution' => 'nullable|string',
-            'severity' => 'required|string|in:low,medium,high',
-            'status' => 'required|string|in:unresolved,resolved',
-        ]);
-
         $error_data = $task->errors()->create($request->all());
 
         return response()->json([
@@ -56,7 +45,7 @@ class ErrorController extends Controller
         ], 200);
     }
 
-    public function update(Request $request, Project $project, Task $task, Error $error)
+    public function update(ErrorRequest $request, Project $project, Task $task, Error $error)
     {
         if ($error->task_id !== $task->id) {
             return response()->json([
@@ -64,16 +53,6 @@ class ErrorController extends Controller
                 'message' => 'Error not found',
             ], 404);
         }
-
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'code_snippet' => 'nullable|string',
-            'cause' => 'nullable|string',
-            'resolution' => 'nullable|string',
-            'severity' => 'required|string|in:low,medium,high',
-            'status' => 'required|string|in:unresolved,resolved',
-        ]);
 
         $error->update($request->all());
 
