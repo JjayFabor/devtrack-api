@@ -16,9 +16,12 @@ class ApikeyThrottle
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $key = $request->header('X-API-KEY');
+        $plainKey = $request->header('X-API-KEY');
+        $hashedKey = hash('sha256', $plainKey);
 
-        if (!$key || !($apiKey = ApiKey::where('key', $key)->where('is_active', true)->first())) {
+        $apiKey = ApiKey::where('key', $hashedKey)->where('is_active', true)->first();
+
+        if (!$plainKey || !$apiKey) {
             return response()->json(['message' => 'Invalid API key'], 401);
         }
 

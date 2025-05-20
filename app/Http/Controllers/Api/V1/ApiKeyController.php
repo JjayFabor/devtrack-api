@@ -33,9 +33,12 @@ class ApiKeyController extends Controller
             'expires_at' => 'nullable|date',
         ]);
 
+        $plainKey = bin2hex(random_bytes(16));
+        $hashedKey = hash('sha256', $plainKey);
+
         $apiKey = ApiKey::create([
             'user_id' => Auth::id(),
-            'key' => bin2hex(random_bytes(16)),
+            'key' => $hashedKey,
             'name' => $request->name,
             'expires_at' => $request->expires_at,
             'ip_address' => $request->getClientIp(),
@@ -45,7 +48,7 @@ class ApiKeyController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'API key generated successfully',
-            'key' => $apiKey->key,
+            'key' => $plainKey,
         ], 201);
     }
 
