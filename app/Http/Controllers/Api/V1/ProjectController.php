@@ -7,6 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Resources\ProjectResource;
 
+
+/**
+ * @group Project
+ *
+ * APIs for managing projects.
+ *
+ * @authenticated
+ * @header Authorization string required Example: "Bearer 1|abc123..."
+ * @header x-api-key string required Your API key. Example: "your-api-key-here"
+ *
+ */
 class ProjectController extends Controller
 {
     public function index()

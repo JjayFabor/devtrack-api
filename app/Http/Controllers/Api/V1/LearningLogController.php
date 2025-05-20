@@ -9,6 +9,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LearningLogRequest;
 use App\Http\Resources\LearningLogResource;
 
+/**
+ * @group Learning Log
+ *
+ * APIs for managing learning logs related to tasks.
+ *
+ * @authenticated
+ * @header Authorization Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."
+ * @header x-api-key your-api-key-hear
+ */
 class LearningLogController extends Controller
 {
     public function index(Project $project, Task $task)

@@ -8,6 +8,15 @@ use App\Http\Requests\TaskRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskResource;
 
+/**
+ * @group Task
+ *
+ * APIs for managing tasks related to projects.
+ *
+ * @authenticated
+ * @header Authorization Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."
+ * @header x-api-key your-api-key-hear
+ */
 class TaskController extends Controller
 {
     public function index(Project $project)

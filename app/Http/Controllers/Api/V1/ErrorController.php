@@ -9,6 +9,15 @@ use App\Http\Requests\ErrorRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ErrorResource;
 
+/**
+ * @group Error
+ *
+ * APIs for managing errors related to tasks.
+ *
+ * @authenticated
+ * @header Authorization Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."
+ * @header x-api-key your-api-key-hear
+ */
 class ErrorController extends Controller
 {
     public function index(Project $project, Task $task)

@@ -8,9 +8,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+/**
+ * @group API Key Management
+ *
+ * APIs for managing API keys.
+ *
+ * @authenticated
+ * @header Authorization string required Example: "Bearer {YOUR_API_TOKEN}"
+ */
 class ApiKeyController extends Controller
 {
     use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -25,6 +34,9 @@ class ApiKeyController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @bodyParam name string The name of the API key. Example: "test-name-api-key"
+     * @bodyParam expires_at datetime nullable When the key expires. Example: null
      */
     public function store(Request $request)
     {
@@ -53,21 +65,8 @@ class ApiKeyController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Revoke the API.
      */
-    public function show(ApiKey $apiKey)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ApiKey $apiKey)
-    {
-        //
-    }
-
     public function revoke(ApiKey $apiKey)
     {
         $this->authorize('delete', $apiKey);
