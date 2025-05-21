@@ -220,7 +220,7 @@ endpoints:
         name: severity
         description: ''
         required: true
-        example: medium
+        example: low
         type: string
         enumValues:
           - low
@@ -267,7 +267,7 @@ endpoints:
       code_snippet: consequatur
       cause: consequatur
       resolution: consequatur
-      severity: medium
+      severity: low
       status: resolved
       message: '"Null pointer exception"'
       details: '"Stack trace..."'

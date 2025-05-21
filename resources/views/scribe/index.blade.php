@@ -1684,7 +1684,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         \"laravel\"
     ],
     \"github_url\": \"http:\\/\\/kunze.biz\\/iste-laborum-eius-est-dolor.html\",
-    \"status\": \"completed\"
+    \"status\": \"active\"
 }"
 </code></pre></div>
 
@@ -1847,10 +1847,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-v1-projects"
-               value="completed"
+               value="active"
                data-component="body">
     <br>
-<p>Example: <code>completed</code></p>
+<p>Example: <code>active</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>planning</code></li> <li><code>active</code></li> <li><code>paused</code></li> <li><code>completed</code></li></ul>
         </div>
@@ -2034,7 +2034,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         \"backend\"
     ],
     \"github_url\": \"http:\\/\\/kunze.biz\\/iste-laborum-eius-est-dolor.html\",
-    \"status\": \"completed\"
+    \"status\": \"active\"
 }"
 </code></pre></div>
 
@@ -2224,10 +2224,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-v1-projects--id-"
-               value="completed"
+               value="active"
                data-component="body">
     <br>
-<p>Example: <code>completed</code></p>
+<p>Example: <code>active</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>planning</code></li> <li><code>active</code></li> <li><code>paused</code></li> <li><code>completed</code></li></ul>
         </div>
@@ -2561,9 +2561,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"title\": \"\\\"Implement login\\\"\",
     \"description\": \"\\\"Implement user login with validation\\\"\",
     \"status\": \"\\\"todo\\\" | [\'todo\', \'in_progress\', \'done\']\",
-    \"priority\": \"low\",
-    \"deadline\": \"2025-05-21T06:41:51\",
-    \"is_recurring\": true
+    \"priority\": \"medium\",
+    \"deadline\": \"2025-05-21T07:23:24\",
+    \"is_recurring\": false
 }"
 </code></pre></div>
 
@@ -2736,10 +2736,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="priority"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="low"
+               value="medium"
                data-component="body">
     <br>
-<p>Example: <code>low</code></p>
+<p>Example: <code>medium</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li></ul>
         </div>
@@ -2749,10 +2749,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="deadline"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="2025-05-21T06:41:51"
+               value="2025-05-21T07:23:24"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-05-21T06:41:51</code></p>
+<p>Must be a valid date. Example: <code>2025-05-21T07:23:24</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>is_recurring</code></b>&nbsp;&nbsp;
@@ -2773,7 +2773,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -2983,9 +2983,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"title\": \"\\\"Update login\\\"\",
     \"description\": \"\\\"Update login validation\\\"\",
     \"status\": \"\\\"done\\\" | [\'todo\', \'in_progress\', \'done\']\",
-    \"priority\": \"medium\",
-    \"deadline\": \"2025-05-21T06:41:51\",
-    \"is_recurring\": true
+    \"priority\": \"high\",
+    \"deadline\": \"2025-05-21T07:23:24\",
+    \"is_recurring\": false
 }"
 </code></pre></div>
 
@@ -3194,10 +3194,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="priority"                data-endpoint="PUTapi-v1-projects--project_id--tasks--id-"
-               value="medium"
+               value="high"
                data-component="body">
     <br>
-<p>Example: <code>medium</code></p>
+<p>Example: <code>high</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li></ul>
         </div>
@@ -3207,10 +3207,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="deadline"                data-endpoint="PUTapi-v1-projects--project_id--tasks--id-"
-               value="2025-05-21T06:41:51"
+               value="2025-05-21T07:23:24"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-05-21T06:41:51</code></p>
+<p>Must be a valid date. Example: <code>2025-05-21T07:23:24</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>is_recurring</code></b>&nbsp;&nbsp;
@@ -3231,7 +3231,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -4861,7 +4861,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code_snippet\": \"consequatur\",
     \"cause\": \"consequatur\",
     \"resolution\": \"consequatur\",
-    \"severity\": \"medium\",
+    \"severity\": \"low\",
     \"status\": \"resolved\",
     \"message\": \"\\\"Null pointer exception\\\"\",
     \"details\": \"\\\"Stack trace...\\\"\"
@@ -5081,10 +5081,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="severity"                data-endpoint="POSTapi-v1-projects--project_id--tasks--task_id--errors"
-               value="medium"
+               value="low"
                data-component="body">
     <br>
-<p>Example: <code>medium</code></p>
+<p>Example: <code>low</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li></ul>
         </div>
