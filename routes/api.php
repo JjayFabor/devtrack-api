@@ -20,6 +20,7 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('api-keys', ApiKeyController::class);
 
         Route::middleware('api.key.throttle')->group(function () {
+            Route::post('api-keys/{apiKey}/regenerate', [ApiKeyController::class, 'regenerate']);
             Route::put('api-keys/{apiKey}/revoke', [ApiKeyController::class, 'revoke']);
 
             Route::apiResource('projects', ProjectController::class);

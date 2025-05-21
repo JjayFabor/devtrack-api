@@ -37,7 +37,7 @@ class ApiKeyPolicy
      */
     public function update(User $user, ApiKey $apiKey): bool
     {
-        return false;
+        return $user->id === $apiKey->user_id;
     }
 
     /**
