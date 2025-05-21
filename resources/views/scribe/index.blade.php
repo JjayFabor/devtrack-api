@@ -228,7 +228,7 @@
         <h1 id="introduction">Introduction</h1>
 <p>A personal productivity API for developers to manage tasks, log learning sessions, track progress on side projects, and store programming-related notes or bugs encountered—all in a centralized and versioned API.</p>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost</code>
+    <strong>Base URL</strong>: <code>https://devtrack-api-production.up.railway.app</code>
 </aside>
 <h1 id="devtrack-api-developer-productivity-platform">DevTrack API – Developer Productivity Platform</h1>
 <p>Welcome to the DevTrack API documentation.</p>
@@ -266,7 +266,7 @@
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/register" \
+    "https://devtrack-api-production.up.railway.app/api/v1/register" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -421,7 +421,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/login" \
+    "https://devtrack-api-production.up.railway.app/api/v1/login" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -553,7 +553,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/logout" \
+    "https://devtrack-api-production.up.railway.app/api/v1/logout" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -668,7 +668,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/me" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/me" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -787,7 +787,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/api-keys" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/api-keys" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -909,7 +909,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/api-keys" \
+    "https://devtrack-api-production.up.railway.app/api/v1/api-keys" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -1042,7 +1042,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/api-keys/26" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/api-keys/26" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1176,7 +1176,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/api-keys/26" \
+    "https://devtrack-api-production.up.railway.app/api/v1/api-keys/26" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1294,7 +1294,7 @@ and returns the new plain key. The old key will no longer be valid.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/api-keys/26/regenerate" \
+    "https://devtrack-api-production.up.railway.app/api/v1/api-keys/26/regenerate" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1422,7 +1422,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/api-keys/26/revoke" \
+    "https://devtrack-api-production.up.railway.app/api/v1/api-keys/26/revoke" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1543,7 +1543,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/projects" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/projects" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -1671,7 +1671,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/projects" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -1684,7 +1684,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         \"laravel\"
     ],
     \"github_url\": \"http:\\/\\/kunze.biz\\/iste-laborum-eius-est-dolor.html\",
-    \"status\": \"active\"
+    \"status\": \"completed\"
 }"
 </code></pre></div>
 
@@ -1847,10 +1847,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-v1-projects"
-               value="active"
+               value="completed"
                data-component="body">
     <br>
-<p>Example: <code>active</code></p>
+<p>Example: <code>completed</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>planning</code></li> <li><code>active</code></li> <li><code>paused</code></li> <li><code>completed</code></li></ul>
         </div>
@@ -1870,7 +1870,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/projects/4" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/projects/4" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -2021,7 +2021,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/projects/4" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -2034,7 +2034,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         \"backend\"
     ],
     \"github_url\": \"http:\\/\\/kunze.biz\\/iste-laborum-eius-est-dolor.html\",
-    \"status\": \"active\"
+    \"status\": \"planning\"
 }"
 </code></pre></div>
 
@@ -2224,10 +2224,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-v1-projects--id-"
-               value="active"
+               value="planning"
                data-component="body">
     <br>
-<p>Example: <code>active</code></p>
+<p>Example: <code>planning</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>planning</code></li> <li><code>active</code></li> <li><code>paused</code></li> <li><code>completed</code></li></ul>
         </div>
@@ -2247,7 +2247,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/projects/4" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -2401,7 +2401,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/projects/4/tasks" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -2552,7 +2552,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/projects/4/tasks" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -2561,9 +2561,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"title\": \"\\\"Implement login\\\"\",
     \"description\": \"\\\"Implement user login with validation\\\"\",
     \"status\": \"\\\"todo\\\" | [\'todo\', \'in_progress\', \'done\']\",
-    \"priority\": \"medium\",
-    \"deadline\": \"2025-05-21T07:23:24\",
-    \"is_recurring\": false
+    \"priority\": \"high\",
+    \"deadline\": \"2025-05-21T07:40:07\",
+    \"is_recurring\": true
 }"
 </code></pre></div>
 
@@ -2736,10 +2736,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="priority"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="medium"
+               value="high"
                data-component="body">
     <br>
-<p>Example: <code>medium</code></p>
+<p>Example: <code>high</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li></ul>
         </div>
@@ -2749,10 +2749,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="deadline"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="2025-05-21T07:23:24"
+               value="2025-05-21T07:40:07"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-05-21T07:23:24</code></p>
+<p>Must be a valid date. Example: <code>2025-05-21T07:40:07</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>is_recurring</code></b>&nbsp;&nbsp;
@@ -2773,7 +2773,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -2791,7 +2791,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/projects/4/tasks/3" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -2974,7 +2974,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/projects/4/tasks/3" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -2984,8 +2984,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"description\": \"\\\"Update login validation\\\"\",
     \"status\": \"\\\"done\\\" | [\'todo\', \'in_progress\', \'done\']\",
     \"priority\": \"high\",
-    \"deadline\": \"2025-05-21T07:23:24\",
-    \"is_recurring\": false
+    \"deadline\": \"2025-05-21T07:40:07\",
+    \"is_recurring\": true
 }"
 </code></pre></div>
 
@@ -3207,10 +3207,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="deadline"                data-endpoint="PUTapi-v1-projects--project_id--tasks--id-"
-               value="2025-05-21T07:23:24"
+               value="2025-05-21T07:40:07"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-05-21T07:23:24</code></p>
+<p>Must be a valid date. Example: <code>2025-05-21T07:40:07</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>is_recurring</code></b>&nbsp;&nbsp;
@@ -3231,7 +3231,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -3249,7 +3249,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/projects/4/tasks/3" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -3431,7 +3431,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/tasks" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/tasks" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -3563,7 +3563,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/projects/4/tasks/3/learning-logs" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3/learning-logs" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -3736,7 +3736,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/projects/4/tasks/3/learning-logs" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3/learning-logs" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -3984,7 +3984,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/projects/4/tasks/3/learning-logs/2" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3/learning-logs/2" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -4189,7 +4189,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/projects/4/tasks/3/learning-logs/2" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3/learning-logs/2" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -4473,7 +4473,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/projects/4/tasks/3/learning-logs/2" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3/learning-logs/2" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -4677,7 +4677,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/projects/4/tasks/3/errors" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3/errors" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -4850,7 +4850,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/projects/4/tasks/3/errors" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3/errors" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -5139,7 +5139,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/projects/4/tasks/3/errors/5" \
+    --get "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3/errors/5" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -5344,7 +5344,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/projects/4/tasks/3/errors/5" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3/errors/5" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \
@@ -5355,8 +5355,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code_snippet\": \"consequatur\",
     \"cause\": \"consequatur\",
     \"resolution\": \"consequatur\",
-    \"severity\": \"high\",
-    \"status\": \"unresolved\",
+    \"severity\": \"low\",
+    \"status\": \"resolved\",
     \"message\": \"\\\"Updated error message\\\"\",
     \"details\": \"\\\"Updated stack trace...\\\"\"
 }"
@@ -5611,10 +5611,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="severity"                data-endpoint="PUTapi-v1-projects--project_id--tasks--task_id--errors--id-"
-               value="high"
+               value="low"
                data-component="body">
     <br>
-<p>Example: <code>high</code></p>
+<p>Example: <code>low</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li></ul>
         </div>
@@ -5624,10 +5624,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-v1-projects--project_id--tasks--task_id--errors--id-"
-               value="unresolved"
+               value="resolved"
                data-component="body">
     <br>
-<p>Example: <code>unresolved</code></p>
+<p>Example: <code>resolved</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>unresolved</code></li> <li><code>resolved</code></li></ul>
         </div>
@@ -5669,7 +5669,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/projects/4/tasks/3/errors/5" \
+    "https://devtrack-api-production.up.railway.app/api/v1/projects/4/tasks/3/errors/5" \
     --header "Authorization: Bearer {YOUR ACCESS TOKEN}" \
     --header "x-api-key: {YOUR_API_KEY}" \
     --header "Content-Type: application/json" \

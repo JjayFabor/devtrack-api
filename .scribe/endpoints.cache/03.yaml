@@ -156,7 +156,7 @@ endpoints:
         name: priority
         description: ''
         required: true
-        example: medium
+        example: high
         type: string
         enumValues:
           - low
@@ -169,7 +169,7 @@ endpoints:
         name: deadline
         description: 'Must be a valid date.'
         required: false
-        example: '2025-05-21T07:23:24'
+        example: '2025-05-21T07:40:07'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -179,7 +179,7 @@ endpoints:
         name: is_recurring
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -189,9 +189,9 @@ endpoints:
       title: '"Implement login"'
       description: '"Implement user login with validation"'
       status: "\"todo\" | ['todo', 'in_progress', 'done']"
-      priority: medium
-      deadline: '2025-05-21T07:23:24'
-      is_recurring: false
+      priority: high
+      deadline: '2025-05-21T07:40:07'
+      is_recurring: true
     fileParameters: []
     responses:
       -
@@ -433,7 +433,7 @@ endpoints:
         name: deadline
         description: 'Must be a valid date.'
         required: false
-        example: '2025-05-21T07:23:24'
+        example: '2025-05-21T07:40:07'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -443,7 +443,7 @@ endpoints:
         name: is_recurring
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -454,8 +454,8 @@ endpoints:
       description: '"Update login validation"'
       status: "\"done\" | ['todo', 'in_progress', 'done']"
       priority: high
-      deadline: '2025-05-21T07:23:24'
-      is_recurring: false
+      deadline: '2025-05-21T07:40:07'
+      is_recurring: true
     fileParameters: []
     responses:
       -

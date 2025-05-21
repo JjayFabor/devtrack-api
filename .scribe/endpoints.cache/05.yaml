@@ -563,7 +563,7 @@ endpoints:
         name: severity
         description: ''
         required: false
-        example: high
+        example: low
         type: string
         enumValues:
           - low
@@ -576,7 +576,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: unresolved
+        example: resolved
         type: string
         enumValues:
           - unresolved
@@ -610,8 +610,8 @@ endpoints:
       code_snippet: consequatur
       cause: consequatur
       resolution: consequatur
-      severity: high
-      status: unresolved
+      severity: low
+      status: resolved
       message: '"Updated error message"'
       details: '"Updated stack trace..."'
     fileParameters: []

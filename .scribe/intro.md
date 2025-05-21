@@ -3,7 +3,7 @@
 A personal productivity API for developers to manage tasks, log learning sessions, track progress on side projects, and store programming-related notes or bugs encountered—all in a centralized and versioned API.
 
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost</code>
+    <strong>Base URL</strong>: <code>https://devtrack-api-production.up.railway.app</code>
 </aside>
 
 # DevTrack API – Developer Productivity Platform

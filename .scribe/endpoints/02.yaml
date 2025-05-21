@@ -122,7 +122,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: active
+        example: completed
         type: string
         enumValues:
           - planning
@@ -139,7 +139,7 @@ endpoints:
         - php
         - laravel
       github_url: 'http://kunze.biz/iste-laborum-eius-est-dolor.html'
-      status: active
+      status: completed
     fileParameters: []
     responses:
       -
@@ -326,7 +326,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: active
+        example: planning
         type: string
         enumValues:
           - planning
@@ -343,7 +343,7 @@ endpoints:
         - api
         - backend
       github_url: 'http://kunze.biz/iste-laborum-eius-est-dolor.html'
-      status: active
+      status: planning
     fileParameters: []
     responses:
       -
