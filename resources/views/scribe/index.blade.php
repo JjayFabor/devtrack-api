@@ -44,11 +44,11 @@
     </span>
 </a>
 <div class="tocify-wrapper">
-
+    
             <div class="lang-selector">
                                             <button type="button" class="lang-button" data-language-name="bash">bash</button>
                     </div>
-
+    
     <div class="search">
         <input type="text" class="search" id="input-search" placeholder="Search">
     </div>
@@ -804,7 +804,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: http://localhost:8000
+access-control-allow-origin: https://devtrack-api-production.up.railway.app
 access-control-allow-credentials: true
  </code></pre></details>         <pre>
 
@@ -1059,7 +1059,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: http://localhost:8000
+access-control-allow-origin: https://devtrack-api-production.up.railway.app
 access-control-allow-credentials: true
  </code></pre></details>         <pre>
 
@@ -2562,8 +2562,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"description\": \"\\\"Implement user login with validation\\\"\",
     \"status\": \"\\\"todo\\\" | [\'todo\', \'in_progress\', \'done\']\",
     \"priority\": \"low\",
-    \"deadline\": \"2025-05-21T02:49:43\",
-    \"is_recurring\": false
+    \"deadline\": \"2025-05-21T06:41:51\",
+    \"is_recurring\": true
 }"
 </code></pre></div>
 
@@ -2749,10 +2749,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="deadline"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="2025-05-21T02:49:43"
+               value="2025-05-21T06:41:51"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-05-21T02:49:43</code></p>
+<p>Must be a valid date. Example: <code>2025-05-21T06:41:51</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>is_recurring</code></b>&nbsp;&nbsp;
@@ -2773,7 +2773,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -2983,8 +2983,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"title\": \"\\\"Update login\\\"\",
     \"description\": \"\\\"Update login validation\\\"\",
     \"status\": \"\\\"done\\\" | [\'todo\', \'in_progress\', \'done\']\",
-    \"priority\": \"low\",
-    \"deadline\": \"2025-05-21T02:49:43\",
+    \"priority\": \"medium\",
+    \"deadline\": \"2025-05-21T06:41:51\",
     \"is_recurring\": true
 }"
 </code></pre></div>
@@ -3194,10 +3194,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="priority"                data-endpoint="PUTapi-v1-projects--project_id--tasks--id-"
-               value="low"
+               value="medium"
                data-component="body">
     <br>
-<p>Example: <code>low</code></p>
+<p>Example: <code>medium</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li></ul>
         </div>
@@ -3207,10 +3207,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="deadline"                data-endpoint="PUTapi-v1-projects--project_id--tasks--id-"
-               value="2025-05-21T02:49:43"
+               value="2025-05-21T06:41:51"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-05-21T02:49:43</code></p>
+<p>Must be a valid date. Example: <code>2025-05-21T06:41:51</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>is_recurring</code></b>&nbsp;&nbsp;
@@ -4861,8 +4861,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code_snippet\": \"consequatur\",
     \"cause\": \"consequatur\",
     \"resolution\": \"consequatur\",
-    \"severity\": \"high\",
-    \"status\": \"unresolved\",
+    \"severity\": \"medium\",
+    \"status\": \"resolved\",
     \"message\": \"\\\"Null pointer exception\\\"\",
     \"details\": \"\\\"Stack trace...\\\"\"
 }"
@@ -5081,10 +5081,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="severity"                data-endpoint="POSTapi-v1-projects--project_id--tasks--task_id--errors"
-               value="high"
+               value="medium"
                data-component="body">
     <br>
-<p>Example: <code>high</code></p>
+<p>Example: <code>medium</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li></ul>
         </div>
@@ -5094,10 +5094,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-v1-projects--project_id--tasks--task_id--errors"
-               value="unresolved"
+               value="resolved"
                data-component="body">
     <br>
-<p>Example: <code>unresolved</code></p>
+<p>Example: <code>resolved</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>unresolved</code></li> <li><code>resolved</code></li></ul>
         </div>
@@ -5355,7 +5355,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code_snippet\": \"consequatur\",
     \"cause\": \"consequatur\",
     \"resolution\": \"consequatur\",
-    \"severity\": \"medium\",
+    \"severity\": \"high\",
     \"status\": \"unresolved\",
     \"message\": \"\\\"Updated error message\\\"\",
     \"details\": \"\\\"Updated stack trace...\\\"\"
@@ -5611,10 +5611,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="severity"                data-endpoint="PUTapi-v1-projects--project_id--tasks--task_id--errors--id-"
-               value="medium"
+               value="high"
                data-component="body">
     <br>
-<p>Example: <code>medium</code></p>
+<p>Example: <code>high</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li></ul>
         </div>
@@ -5859,9 +5859,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+            
 
-
-
+        
     </div>
     <div class="dark-box">
                     <div class="lang-selector">

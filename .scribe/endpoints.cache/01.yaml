@@ -38,7 +38,7 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
+          access-control-allow-origin: 'https://devtrack-api-production.up.railway.app'
           access-control-allow-credentials: 'true'
         description: null
         custom: []
@@ -153,7 +153,7 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
+          access-control-allow-origin: 'https://devtrack-api-production.up.railway.app'
           access-control-allow-credentials: 'true'
         description: null
         custom: []

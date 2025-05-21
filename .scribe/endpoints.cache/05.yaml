@@ -220,7 +220,7 @@ endpoints:
         name: severity
         description: ''
         required: true
-        example: high
+        example: medium
         type: string
         enumValues:
           - low
@@ -233,7 +233,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: unresolved
+        example: resolved
         type: string
         enumValues:
           - unresolved
@@ -267,8 +267,8 @@ endpoints:
       code_snippet: consequatur
       cause: consequatur
       resolution: consequatur
-      severity: high
-      status: unresolved
+      severity: medium
+      status: resolved
       message: '"Null pointer exception"'
       details: '"Stack trace..."'
     fileParameters: []
@@ -563,7 +563,7 @@ endpoints:
         name: severity
         description: ''
         required: false
-        example: medium
+        example: high
         type: string
         enumValues:
           - low
@@ -610,7 +610,7 @@ endpoints:
       code_snippet: consequatur
       cause: consequatur
       resolution: consequatur
-      severity: medium
+      severity: high
       status: unresolved
       message: '"Updated error message"'
       details: '"Updated stack trace..."'
