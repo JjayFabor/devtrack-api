@@ -2,6 +2,30 @@
 
 use Illuminate\Support\Str;
 
+if (env('DATABASE_URL')) {
+    $DATABASE_URL = parse_url(env('DATABASE_URL'));
+
+    return [
+        'mysql' => [
+            'driver' => 'mysql',
+            'host' => $DATABASE_URL['host'] ?? env('DB_HOST', '127.0.0.1'),
+            'port' => $DATABASE_URL['port'] ?? env('DB_PORT', '3306'),
+            'database' => ltrim($DATABASE_URL['path'], '/') ?? env('DB_DATABASE', 'forge'),
+            'username' => $DATABASE_URL['user'] ?? env('DB_USERNAME', 'forge'),
+            'password' => $DATABASE_URL['pass'] ?? env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+    ];
+}
+
 return [
 
     /*
