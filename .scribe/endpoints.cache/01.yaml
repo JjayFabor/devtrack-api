@@ -16,12 +16,12 @@ endpoints:
         APIs for managing API keys.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Display a listing of the resource.'
+      title: 'Retrieve a list of API keys'
       description: ''
       authenticated: true
       custom: []
     headers:
-      Authorization: 'string required Example: "Bearer {YOUR_API_TOKEN}"'
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -62,12 +62,12 @@ endpoints:
         APIs for managing API keys.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Store a newly created resource in storage.'
+      title: 'Generate a new API key'
       description: ''
       authenticated: true
       custom: []
     headers:
-      Authorization: 'string required Example: "Bearer {YOUR_API_TOKEN}"'
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -111,6 +111,63 @@ endpoints:
     custom: []
   -
     httpMethods:
+      - GET
+    uri: 'api/v1/api-keys/{id}'
+    metadata:
+      groupName: 'API Key Management'
+      groupDescription: |-
+
+        APIs for managing API keys.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Retrieve a specific API key'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the api key.'
+        required: true
+        example: 26
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 26
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:8000'
+          access-control-allow-credentials: 'true'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer {YOUR_AUTH_TOKEN}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - DELETE
     uri: 'api/v1/api-keys/{id}'
     metadata:
@@ -120,12 +177,12 @@ endpoints:
         APIs for managing API keys.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Remove the specified resource from storage.'
+      title: 'Remove the API key'
       description: ''
       authenticated: true
       custom: []
     headers:
-      Authorization: 'string required Example: "Bearer {YOUR_API_TOKEN}"'
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -158,6 +215,66 @@ endpoints:
     custom: []
   -
     httpMethods:
+      - POST
+    uri: 'api/v1/api-keys/{apiKey_id}/regenerate'
+    metadata:
+      groupName: 'API Key Management'
+      groupDescription: |-
+
+        APIs for managing API keys.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Regenerate the API key'
+      description: |-
+        Generates a new plain API key for the given API key record, updates the hash in the database,
+        and returns the new plain key. The old key will no longer be valid.
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      apiKey_id:
+        name: apiKey_id
+        description: 'The ID of the apiKey.'
+        required: true
+        example: 26
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      apiKey_id: 26
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "API key regenerated successfully",
+            "key": "newplainapikey123..."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer {YOUR_AUTH_TOKEN}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - PUT
     uri: 'api/v1/api-keys/{apiKey_id}/revoke'
     metadata:
@@ -167,12 +284,12 @@ endpoints:
         APIs for managing API keys.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Revoke the API.'
-      description: ''
+      title: 'Revoke the API'
+      description: 'Revokes the API key by setting its `is_active` status to false.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'string required Example: "Bearer {YOUR_API_TOKEN}"'
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:

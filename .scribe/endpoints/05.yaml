@@ -1,4 +1,4 @@
-name: Error
+name: Errors
 description: |-
 
   APIs for managing errors related to tasks.
@@ -8,19 +8,19 @@ endpoints:
       - GET
     uri: 'api/v1/projects/{project_id}/tasks/{task_id}/errors'
     metadata:
-      groupName: Error
+      groupName: Errors
       groupDescription: |-
 
         APIs for managing errors related to tasks.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'List errors for a task'
+      description: 'Retrieve all errors associated with a specific task in a project.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -44,9 +44,31 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       task_id: 3
+      project: 17
+      task: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -54,14 +76,15 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
-          access-control-allow-credentials: 'true'
-        description: null
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Error list retrieved successfully",
+            "data": [...]
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:
@@ -77,19 +100,19 @@ endpoints:
       - POST
     uri: 'api/v1/projects/{project_id}/tasks/{task_id}/errors'
     metadata:
-      groupName: Error
+      groupName: Errors
       groupDescription: |-
 
         APIs for managing errors related to tasks.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Create a new error for a task'
+      description: 'Store a new error entry for a specific task.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -113,9 +136,31 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       task_id: 3
+      project: 17
+      task: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -173,7 +218,7 @@ endpoints:
         name: severity
         description: ''
         required: true
-        example: low
+        example: high
         type: string
         enumValues:
           - low
@@ -194,16 +239,49 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      message:
+        name: message
+        description: 'The error message.'
+        required: true
+        example: '"Null pointer exception"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      details:
+        name: details
+        description: 'Additional error details.'
+        required: false
+        example: '"Stack trace..."'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
     cleanBodyParameters:
       title: vmqeopfuudtdsufvyvddq
       description: 'Dolores dolorum amet iste laborum eius est dolor.'
       code_snippet: consequatur
       cause: consequatur
       resolution: consequatur
-      severity: low
+      severity: high
       status: unresolved
+      message: '"Null pointer exception"'
+      details: '"Stack trace..."'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "success": true,
+            "message": "Error created successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
@@ -218,19 +296,19 @@ endpoints:
       - GET
     uri: 'api/v1/projects/{project_id}/tasks/{task_id}/errors/{id}'
     metadata:
-      groupName: Error
+      groupName: Errors
       groupDescription: |-
 
         APIs for managing errors related to tasks.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Show a specific error'
+      description: 'Retrieve details of a specific error for a task.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -264,10 +342,43 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      error:
+        name: error
+        description: 'The ID of the error.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       task_id: 3
       id: 5
+      project: 17
+      task: 17
+      error: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -275,14 +386,25 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
-          access-control-allow-credentials: 'true'
-        description: null
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Error retrieved successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Error not found"
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:
@@ -299,19 +421,19 @@ endpoints:
       - PATCH
     uri: 'api/v1/projects/{project_id}/tasks/{task_id}/errors/{id}'
     metadata:
-      groupName: Error
+      groupName: Errors
       groupDescription: |-
 
         APIs for managing errors related to tasks.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Update an error'
+      description: 'Update the details of a specific error for a task.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -345,10 +467,43 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      error:
+        name: error
+        description: 'The ID of the error.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       task_id: 3
       id: 5
+      project: 17
+      task: 17
+      error: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -427,6 +582,26 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      message:
+        name: message
+        description: 'The updated error message.'
+        required: false
+        example: '"Updated error message"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      details:
+        name: details
+        description: 'The updated error details.'
+        required: false
+        example: '"Updated stack trace..."'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
     cleanBodyParameters:
       title: vmqeopfuudtdsufvyvddq
       description: 'Dolores dolorum amet iste laborum eius est dolor.'
@@ -435,8 +610,31 @@ endpoints:
       resolution: consequatur
       severity: medium
       status: unresolved
+      message: '"Updated error message"'
+      details: '"Updated stack trace..."'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Error updated successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Error not found"
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
@@ -451,19 +649,19 @@ endpoints:
       - DELETE
     uri: 'api/v1/projects/{project_id}/tasks/{task_id}/errors/{id}'
     metadata:
-      groupName: Error
+      groupName: Errors
       groupDescription: |-
 
         APIs for managing errors related to tasks.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Delete an error'
+      description: 'Delete a specific error from a task.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -497,16 +695,69 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      error:
+        name: error
+        description: 'The ID of the error.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       task_id: 3
       id: 5
+      project: 17
+      task: 17
+      error: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Error deleted successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Error not found"
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers

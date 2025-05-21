@@ -1,4 +1,4 @@
-name: Task
+name: Tasks
 description: |-
 
   APIs for managing tasks related to projects.
@@ -8,19 +8,19 @@ endpoints:
       - GET
     uri: 'api/v1/projects/{project_id}/tasks'
     metadata:
-      groupName: Task
+      groupName: Tasks
       groupDescription: |-
 
         APIs for managing tasks related to projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'List tasks for a project'
+      description: 'Retrieve all tasks associated with a specific project.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -34,8 +34,19 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
+      project: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -43,14 +54,15 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
-          access-control-allow-credentials: 'true'
-        description: null
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Task list retrieved successfully.",
+            "data": [...]
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:
@@ -66,19 +78,19 @@ endpoints:
       - POST
     uri: 'api/v1/projects/{project_id}/tasks'
     metadata:
-      groupName: Task
+      groupName: Tasks
       groupDescription: |-
 
         APIs for managing tasks related to projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Create a new task for a project'
+      description: 'Store a new task under a specific project.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -92,42 +104,50 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
+      project: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       title:
         name: title
-        description: 'Must not be greater than 255 characters.'
+        description: 'The title of the task.'
         required: true
-        example: vmqeopfuudtdsufvyvddq
+        example: '"Implement login"'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       description:
         name: description
-        description: ''
+        description: 'The task description.'
         required: false
-        example: 'Dolores dolorum amet iste laborum eius est dolor.'
+        example: '"Implement user login with validation"'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
       status:
         name: status
-        description: ''
-        required: true
-        example: in_progress
+        description: 'The status of the task.'
+        required: false
+        example: "\"todo\" | ['todo', 'in_progress', 'done']"
         type: string
-        enumValues:
-          - todo
-          - in_progress
-          - done
-        exampleWasSpecified: false
+        enumValues: []
+        exampleWasSpecified: true
         nullable: false
         custom: []
       priority:
@@ -147,7 +167,7 @@ endpoints:
         name: deadline
         description: 'Must be a valid date.'
         required: false
-        example: '2025-05-20T07:19:32'
+        example: '2025-05-21T02:49:43'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -164,14 +184,25 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      title: vmqeopfuudtdsufvyvddq
-      description: 'Dolores dolorum amet iste laborum eius est dolor.'
-      status: in_progress
+      title: '"Implement login"'
+      description: '"Implement user login with validation"'
+      status: "\"todo\" | ['todo', 'in_progress', 'done']"
       priority: low
-      deadline: '2025-05-20T07:19:32'
+      deadline: '2025-05-21T02:49:43'
       is_recurring: false
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "success": true,
+            "message": "Task created successfully.",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
@@ -186,19 +217,19 @@ endpoints:
       - GET
     uri: 'api/v1/projects/{project_id}/tasks/{id}'
     metadata:
-      groupName: Task
+      groupName: Tasks
       groupDescription: |-
 
         APIs for managing tasks related to projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Show a specific task in a project'
+      description: 'Retrieve details of a specific task for a project.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -222,9 +253,31 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       id: 3
+      project: 17
+      task: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -232,14 +285,25 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
-          access-control-allow-credentials: 'true'
-        description: null
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Task retrieved successfully.",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Task not found in this project."
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:
@@ -256,19 +320,19 @@ endpoints:
       - PATCH
     uri: 'api/v1/projects/{project_id}/tasks/{id}'
     metadata:
-      groupName: Task
+      groupName: Tasks
       groupDescription: |-
 
         APIs for managing tasks related to projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Update a task in a project'
+      description: 'Update the details of a specific task for a project.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -292,50 +356,69 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       id: 3
+      project: 17
+      task: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       title:
         name: title
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: vmqeopfuudtdsufvyvddq
+        description: 'The updated title.'
+        required: false
+        example: '"Update login"'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       description:
         name: description
-        description: ''
+        description: 'The updated description.'
         required: false
-        example: 'Dolores dolorum amet iste laborum eius est dolor.'
+        example: '"Update login validation"'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
       status:
         name: status
-        description: ''
-        required: true
-        example: todo
+        description: 'The updated status.'
+        required: false
+        example: "\"done\" | ['todo', 'in_progress', 'done']"
         type: string
-        enumValues:
-          - todo
-          - in_progress
-          - done
-        exampleWasSpecified: false
+        enumValues: []
+        exampleWasSpecified: true
         nullable: false
         custom: []
       priority:
         name: priority
         description: ''
         required: true
-        example: medium
+        example: low
         type: string
         enumValues:
           - low
@@ -348,7 +431,7 @@ endpoints:
         name: deadline
         description: 'Must be a valid date.'
         required: false
-        example: '2025-05-20T07:19:32'
+        example: '2025-05-21T02:49:43'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -358,21 +441,42 @@ endpoints:
         name: is_recurring
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      title: vmqeopfuudtdsufvyvddq
-      description: 'Dolores dolorum amet iste laborum eius est dolor.'
-      status: todo
-      priority: medium
-      deadline: '2025-05-20T07:19:32'
-      is_recurring: false
+      title: '"Update login"'
+      description: '"Update login validation"'
+      status: "\"done\" | ['todo', 'in_progress', 'done']"
+      priority: low
+      deadline: '2025-05-21T02:49:43'
+      is_recurring: true
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Task updated successfully.",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Task not found in this project."
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
@@ -387,19 +491,19 @@ endpoints:
       - DELETE
     uri: 'api/v1/projects/{project_id}/tasks/{id}'
     metadata:
-      groupName: Task
+      groupName: Tasks
       groupDescription: |-
 
         APIs for managing tasks related to projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Delete a task from a project'
+      description: 'Delete a specific task from a project.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -423,15 +527,57 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       id: 3
+      project: 17
+      task: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Task deleted successfully."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Task not found in this project."
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
@@ -446,19 +592,19 @@ endpoints:
       - GET
     uri: api/v1/tasks
     metadata:
-      groupName: Task
+      groupName: Tasks
       groupDescription: |-
 
         APIs for managing tasks related to projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'List all tasks'
+      description: 'Retrieve all tasks across all projects.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -470,14 +616,15 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
-          access-control-allow-credentials: 'true'
-        description: null
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "All tasks retrieved successfully.",
+            "data": [...]
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:

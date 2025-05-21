@@ -1,4 +1,4 @@
-name: 'Learning Log'
+name: 'Learning Logs'
 description: |-
 
   APIs for managing learning logs related to tasks.
@@ -8,19 +8,19 @@ endpoints:
       - GET
     uri: 'api/v1/projects/{project_id}/tasks/{task_id}/learning-logs'
     metadata:
-      groupName: 'Learning Log'
+      groupName: 'Learning Logs'
       groupDescription: |-
 
         APIs for managing learning logs related to tasks.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'List learning logs for a task'
+      description: 'Retrieve all learning logs associated with a specific task in a project.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -44,9 +44,31 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       task_id: 3
+      project: 17
+      task: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -54,14 +76,15 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
-          access-control-allow-credentials: 'true'
-        description: null
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Learning logs retrieved successfully",
+            "data": [...]
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:
@@ -77,19 +100,19 @@ endpoints:
       - POST
     uri: 'api/v1/projects/{project_id}/tasks/{task_id}/learning-logs'
     metadata:
-      groupName: 'Learning Log'
+      groupName: 'Learning Logs'
       groupDescription: |-
 
         APIs for managing learning logs related to tasks.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Create a new learning log for a task'
+      description: 'Store a new learning log entry for a specific task.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -113,9 +136,31 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       task_id: 3
+      project: 17
+      task: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -151,12 +196,12 @@ endpoints:
         custom: []
       duration:
         name: duration
-        description: ''
-        required: true
-        example: 17
+        description: 'The time spent in minutes.'
+        required: false
+        example: 60
         type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       resources:
@@ -169,13 +214,35 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         custom: []
+      description:
+        name: description
+        description: 'The learning log description.'
+        required: true
+        example: '"Read Laravel docs"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
     cleanBodyParameters:
       title: vmqeopfuudtdsufvyvddq
       topic: amniihfqcoynlazghdtqt
       summary: consequatur
-      duration: 17
+      duration: 60
+      description: '"Read Laravel docs"'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "success": true,
+            "message": "Learning log created successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
@@ -190,19 +257,19 @@ endpoints:
       - GET
     uri: 'api/v1/projects/{project_id}/tasks/{task_id}/learning-logs/{id}'
     metadata:
-      groupName: 'Learning Log'
+      groupName: 'Learning Logs'
       groupDescription: |-
 
         APIs for managing learning logs related to tasks.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Show a specific learning log'
+      description: 'Retrieve details of a specific learning log for a task.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -236,10 +303,43 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      learning_log:
+        name: learning_log
+        description: 'The ID of the learning log.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       task_id: 3
       id: 2
+      project: 17
+      task: 17
+      learning_log: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -247,14 +347,25 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
-          access-control-allow-credentials: 'true'
-        description: null
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Learning log retrieved successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Learning log not found for this task."
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:
@@ -271,19 +382,19 @@ endpoints:
       - PATCH
     uri: 'api/v1/projects/{project_id}/tasks/{task_id}/learning-logs/{id}'
     metadata:
-      groupName: 'Learning Log'
+      groupName: 'Learning Logs'
       groupDescription: |-
 
         APIs for managing learning logs related to tasks.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Update a learning log'
+      description: 'Update the details of a specific learning log for a task.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -317,10 +428,43 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      learning_log:
+        name: learning_log
+        description: 'The ID of the learning log.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       task_id: 3
       id: 2
+      project: 17
+      task: 17
+      learning_log: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -356,12 +500,12 @@ endpoints:
         custom: []
       duration:
         name: duration
-        description: ''
-        required: true
-        example: 17
+        description: 'The updated duration in minutes.'
+        required: false
+        example: 90
         type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       resources:
@@ -374,13 +518,45 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         custom: []
+      description:
+        name: description
+        description: 'The updated description.'
+        required: false
+        example: '"Watched Laravel video"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
     cleanBodyParameters:
       title: vmqeopfuudtdsufvyvddq
       topic: amniihfqcoynlazghdtqt
       summary: consequatur
-      duration: 17
+      duration: 90
+      description: '"Watched Laravel video"'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Learning log updated successfully",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Learning log not found for this task."
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
@@ -395,19 +571,19 @@ endpoints:
       - DELETE
     uri: 'api/v1/projects/{project_id}/tasks/{task_id}/learning-logs/{id}'
     metadata:
-      groupName: 'Learning Log'
+      groupName: 'Learning Logs'
       groupDescription: |-
 
         APIs for managing learning logs related to tasks.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Delete a learning log'
+      description: 'Delete a specific learning log from a task.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR ACCESS TOKEN} "Bearer 1|abc123..."'
-      x-api-key: your-api-key-hear
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -441,16 +617,69 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      task:
+        name: task
+        description: 'The ID of the task.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      learning_log:
+        name: learning_log
+        description: 'The ID of the learning log.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       project_id: 4
       task_id: 3
       id: 2
+      project: 17
+      task: 17
+      learning_log: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 204
+        content: |-
+          {
+            "success": true,
+            "message": "Learning log deleted successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Learning log not found for this task."
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers

@@ -84,6 +84,7 @@ class AuthController extends Controller
      * Get the authenticated user's info
      *
      * @authenticated
+     * @header Authorization Bearer {YOUR ACCESS TOKEN}
      *
      * @response 200 {
      *   "success": true,
@@ -99,6 +100,7 @@ class AuthController extends Controller
      * Log out the authenticated user
      *
      * @authenticated
+     * @header Authorization Bearer {YOUR ACCESS TOKEN}
      *
      * @response 200 {
      *   "success": true,

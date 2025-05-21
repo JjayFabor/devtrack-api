@@ -88,7 +88,7 @@ return [
         'base_url' => 'http://localhost:8000',
 
         // [Laravel Sanctum] Fetch a CSRF token before each request, and add it as an X-XSRF-TOKEN header.
-        'use_csrf' => false,
+        'use_csrf' => true,
 
         // The URL to fetch the CSRF token from (if `use_csrf` is true).
         'csrf_url' => '/sanctum/csrf-cookie',
@@ -118,35 +118,35 @@ return [
         'placeholder' => 'Bearer {YOUR_AUTH_TOKEN}',
 
         // Any extra authentication-related info for your users. Markdown and HTML are supported.
-        'extra_info' => <<<HTML
-            <b>Authentication Required:</b><br>
-            <ul>
-                <li>
-                    <b>Bearer Token</b>: First, log in to obtain your user token. Send it in the <code>Authorization</code> header as <code>Bearer &lt;token&gt;</code>.
-                </li>
-                <li>
-                    <b>API Key</b>: You must also generate an API key using the <b>API Key Management</b> endpoints. Provide your API key in the <code>X-API-KEY</code> header for all authenticated requests.
-                </li>
-            </ul>
-            <b>Note:</b> Most endpoints require <u>both</u> the Bearer token and the API key in the headers.
-        HTML,
+        'extra_info' => <<<MD
+        ## Authentication Required
+
+        - **Bearer Token**: First, log in to obtain your user token. Send it in the `Authorization` header as `Bearer {YOUR_AUTH_TOKEN}`.
+        - **API Key**: You must also generate an API key using the **API Key Management** endpoints. Provide your API key in the `X-API-KEY` header for all authenticated requests.
+
+        ### **Note**: Most endpoints require <u>both</u> the Bearer token and the API key in the headers.
+        MD,
     ],
 
     // Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
-    'intro_text' => <<<INTRO
-        This documentation aims to provide all the information you need to work with our API.
+    'intro_text' => <<<MD
+    # DevTrack API – Developer Productivity Platform
 
-        <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
-        You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
-    INTRO,
+    Welcome to the DevTrack API documentation.
 
+    This documentation aims to provide all the information you need to work with our API.
+
+    - Manage tasks, log learning sessions, track progress on side projects, and store programming-related notes or bugs encountered—all in a centralized and versioned API.
+    - As you scroll, you'll see code examples for working with the API in bash (for now) in the dark area to the right.
+
+    **Happy coding!**
+    MD,
     // Example requests for each endpoint will be shown in each of these languages.
     // Supported options are: bash, javascript, php, python
     // To add a language of your own, see https://scribe.knuckles.wtf/laravel/advanced/example-requests
     // Note: does not work for `external` docs types
     'example_languages' => [
         'bash',
-        'javascript',
     ],
 
     // Generate a Postman collection (v2.1.0) in addition to HTML docs.

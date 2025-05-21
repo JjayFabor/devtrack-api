@@ -1,4 +1,4 @@
-name: Project
+name: Projects
 description: |-
 
   APIs for managing projects.
@@ -8,19 +8,19 @@ endpoints:
       - GET
     uri: api/v1/projects
     metadata:
-      groupName: Project
+      groupName: Projects
       groupDescription: |-
 
         APIs for managing projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'List all projects'
+      description: 'Retrieve a list of all projects for the authenticated user.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'string required Example: "Bearer 1|abc123..."'
-      x-api-key: 'string required Your API key. Example: "your-api-key-here"'
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -32,14 +32,15 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
-          access-control-allow-credentials: 'true'
-        description: null
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Project list retrieved successfully.",
+            "data": [...]
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:
@@ -55,19 +56,19 @@ endpoints:
       - POST
     uri: api/v1/projects
     metadata:
-      groupName: Project
+      groupName: Projects
       groupDescription: |-
 
         APIs for managing projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Create a new project'
+      description: 'Store a new project for the authenticated user.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'string required Example: "Bearer 1|abc123..."'
-      x-api-key: 'string required Your API key. Example: "your-api-key-here"'
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -77,32 +78,34 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: 'Must not be greater than 255 characters.'
+        description: 'The name of the project.'
         required: true
-        example: vmqeopfuudtdsufvyvddq
+        example: '"My Project"'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       description:
         name: description
-        description: ''
-        required: true
-        example: 'Dolores dolorum amet iste laborum eius est dolor.'
+        description: 'The project description.'
+        required: false
+        example: '"A sample project"'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       tags:
         name: tags
-        description: ''
+        description: 'List of tags.'
         required: false
-        example: null
-        type: object
+        example:
+          - php
+          - laravel
+        type: 'string[]'
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
       github_url:
@@ -130,12 +133,26 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: vmqeopfuudtdsufvyvddq
-      description: 'Dolores dolorum amet iste laborum eius est dolor.'
+      name: '"My Project"'
+      description: '"A sample project"'
+      tags:
+        - php
+        - laravel
       github_url: 'http://kunze.biz/iste-laborum-eius-est-dolor.html'
       status: completed
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "success": true,
+            "message": "Project created successfully.",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
@@ -150,19 +167,19 @@ endpoints:
       - GET
     uri: 'api/v1/projects/{id}'
     metadata:
-      groupName: Project
+      groupName: Projects
       groupDescription: |-
 
         APIs for managing projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Show a project'
+      description: 'Retrieve details of a specific project.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'string required Example: "Bearer 1|abc123..."'
-      x-api-key: 'string required Your API key. Example: "your-api-key-here"'
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -176,8 +193,19 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       id: 4
+      project: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -185,14 +213,15 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:8000'
-          access-control-allow-credentials: 'true'
-        description: null
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Project retrieved successfully.",
+            "data": {...}
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:
@@ -209,19 +238,19 @@ endpoints:
       - PATCH
     uri: 'api/v1/projects/{id}'
     metadata:
-      groupName: Project
+      groupName: Projects
       groupDescription: |-
 
         APIs for managing projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Update a project'
+      description: 'Update the details of a specific project.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'string required Example: "Bearer 1|abc123..."'
-      x-api-key: 'string required Your API key. Example: "your-api-key-here"'
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -235,39 +264,52 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       id: 4
+      project: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       name:
         name: name
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: vmqeopfuudtdsufvyvddq
+        description: 'The updated name.'
+        required: false
+        example: '"Updated Project"'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       description:
         name: description
-        description: ''
-        required: true
-        example: 'Dolores dolorum amet iste laborum eius est dolor.'
+        description: 'The updated description.'
+        required: false
+        example: '"Updated description"'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       tags:
         name: tags
-        description: ''
+        description: 'List of tags.'
         required: false
-        example: null
-        type: object
+        example:
+          - api
+          - backend
+        type: 'string[]'
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
       github_url:
@@ -295,12 +337,26 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: vmqeopfuudtdsufvyvddq
-      description: 'Dolores dolorum amet iste laborum eius est dolor.'
+      name: '"Updated Project"'
+      description: '"Updated description"'
+      tags:
+        - api
+        - backend
       github_url: 'http://kunze.biz/iste-laborum-eius-est-dolor.html'
       status: completed
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Project updated successfully.",
+            "data": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
@@ -315,19 +371,19 @@ endpoints:
       - DELETE
     uri: 'api/v1/projects/{id}'
     metadata:
-      groupName: Project
+      groupName: Projects
       groupDescription: |-
 
         APIs for managing projects.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Delete a project'
+      description: 'Delete a specific project.'
       authenticated: true
       custom: []
     headers:
-      Authorization: 'string required Example: "Bearer 1|abc123..."'
-      x-api-key: 'string required Your API key. Example: "your-api-key-here"'
+      Authorization: 'Bearer {YOUR ACCESS TOKEN}'
+      x-api-key: '{YOUR_API_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -341,14 +397,35 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      project:
+        name: project
+        description: 'The ID of the project.'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanUrlParameters:
       id: 4
+      project: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Project deleted successfully."
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
