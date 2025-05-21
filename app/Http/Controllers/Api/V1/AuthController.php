@@ -6,8 +6,28 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * @group Authentication
+ *
+ * APIs for user authentication
+ */
 class AuthController extends Controller
 {
+
+    /**
+     * Register a new user
+     *
+     * @bodyParam name string required The user's name. Example: John Doe
+     * @bodyParam email string required The user's email. Example: john@example.com
+     * @bodyParam password string required The user's password. Example: password123
+     * @bodyParam password_confirmation string required The password confirmation. Example: password123
+     *
+     * @response 201 {
+     *   "success": true,
+     *   "message": "User registered successfully",
+     *   "token": "1|abc123..."
+     * }
+     */
     public function register(Request $request)
     {
         $validated = $request->validate([
@@ -26,7 +46,19 @@ class AuthController extends Controller
             'token' => $token,
         ], 201);
     }
-
+  
+    /**
+     * Log in a user
+     *
+     * @bodyParam email string required The user's email. Example: john@example.com
+     * @bodyParam password string required The user's password. Example: password123
+     *
+     * @response 200 {
+     *   "success": true,
+     *   "message": "User logged in successfully",
+     *   "token": "1|abc123..."
+     * }
+     */
     public function login(Request $request)
     {
         $validated = $request->validate([
@@ -50,38 +82,35 @@ class AuthController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/v1/me",
-     *     summary="Get authenticated user",
-     *     tags={"Auth"},
-     *     security={{"bearerAuth":{}}},
-     *     @OA\Response(
-     *         response=200,
-     *         description="Authenticated user data",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="user", type="object",
-     *                 @OA\Property(property="id", type="integer", example=1),
-     *                 @OA\Property(property="name", type="string", example="Test User"),
-     *                 @OA\Property(property="email", type="string", example="user@example.com"),
-     *             )
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthenticated"
-     *     )
-     * )
+     * Get the authenticated user's info
+     *
+     * @authenticated
+     * @header Authorization Bearer {YOUR ACCESS TOKEN}
+     *
+     * @response 200 {
+     *   "success": true,
+     *   "user": { "id": 1, "name": "John Doe", ... }
+     * }
      */
     public function me(Request $request)
     {
         return response()->json(['success' => true, 'user' => $request->user()], 200);
     }
-
+  
+    /**
+     * Log out the authenticated user
+     *
+     * @authenticated
+     * @header Authorization Bearer {YOUR ACCESS TOKEN}
+     *
+     * @response 200 {
+     *   "success": true,
+     *   "message": "User logged out successfully"
+     * }
+     */
     public function logout()
     {
         auth()->user()->tokens()->delete();
 
         return response()->json(['success' => true, 'message' => 'User logged out successfully'], 200);
     }
-}

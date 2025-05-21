@@ -2,360 +2,114 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
 use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProjectRequest;
+use App\Http\Resources\ProjectResource;
 
+
+/**
+ * @group Projects
+ *
+ * APIs for managing projects.
+ *
+ * @authenticated
+ * @header Authorization Bearer {YOUR ACCESS TOKEN}
+ * @header x-api-key {YOUR_API_KEY}
+ *
+ */
 class ProjectController extends Controller
-    {
+{
     /**
-     * @OA\Get(
-     *     path="/api/v1/projects",
-     *     summary="Get all projects",
-     *     tags={"Projects"},
-     *     security={{"bearerAuth":{}}},
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful response",
-     *         @OA\JsonContent(
-     *            @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(
-     *                 property="projects",
-     *                 type="array",
-     *                 @OA\Items(
-     *                     type="object",
-     *                     @OA\Property(property="id", type="integer"),
-     *                     @OA\Property(property="name", type="string"),
-     *                     @OA\Property(property="user_id", type="integer"),
-     *                     @OA\Property(property="description", type="string"),
-     *                     @OA\Property(
-     *                         property="tags",
-     *                         type="array",
-     *                         @OA\Items(type="string")
-     *                     ),
-     *                     @OA\Property(property="github_url", type="string"),
-     *                     @OA\Property(property="status", type="string"),
-     *                     @OA\Property(
-     *                         property="created_at",
-     *                         type="string",
-     *                         format="date-time"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="updated_at",
-     *                         type="string",
-     *                         format="date-time"
-     *                     )
-     *                 )
-     *             )
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthenticated",
-     *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 property="message",
-     *                 type="string",
-     *                 example="Unauthenticated."
-     *             )
-     *         )
-     *     )
-     * )
+     * List all projects
+     *
+     * Retrieve a list of all projects for the authenticated user.
+     *
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Project list retrieved successfully.",
+     *   "data": [...]
+     * }
      */
     public function index()
     {
-        return response()->json(['success' => true, 'projects' => Project::all()], 200);
+        return ProjectResource::collection(Project::all())
+            ->additional([
+                'success' => true,
+                'message' => 'Project list retrieved successfully.',
+            ]);
     }
 
     /**
-     * @OA\Post(
-     *     path="/api/v1/projects",
-     *     summary="Create a new project",
-     *     tags={"Projects"},
-     *     security={{"bearerAuth":{}}},
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *             @OA\Property(property="name", type="string", example="Project Name"),
-     *             @OA\Property(property="description", type="string", example="Project Description"),
-     *             @OA\Property(property="tags", type="array", @OA\Items(type="string"), example={"tag1", "tag2"}),
-     *             @OA\Property(property="github_url", type="string", example="https://github.com/TestUser/test-repo"),
-     *             @OA\Property(property="status", type="string", example="planning"),
-     *             @OA\Property(property="user_id", type="integer", example=1),
-     *             @OA\Property(property="created_at", type="string", format="date-time", example="2023-10-01T12:00:00Z"),
-     *             @OA\Property(property="updated_at", type="string", format="date-time", example="2023-10-01T12:00:00Z")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Project created successfully",
-     *         @OA\JsonContent(
-     *           @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="project", type="object",
-     *                 @OA\Property(property="id", type="integer", example=1),
-     *                 @OA\Property(property="name", type="string", example="Project Name"),
-     *                 @OA\Property(property="user_id", type="integer", example=1),
-     *                 @OA\Property(property="description", type="string", example="Project Description"),
-     *                 @OA\Property(
-     *                     property="tags",
-     *                     type="array",
-     *                     @OA\Items(type="string", example={"tag1", "tag2"})
-     *                 ),
-     *                 @OA\Property(property="github_url", type="string", example="https://github.com/TestUser/test-repo"),
-     *                 @OA\Property(property="status", type="string", example="planning"),
-     *                 @OA\Property(
-     *                     property="created_at",
-     *                     type="string",
-     *                     format="date-time"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="updated_at",
-     *                     type="string",
-     *                     format="date-time"
-     *                 )
-     *             )
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Validation error",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="The given data was invalid."),
-     *             @OA\Property(
-     *                 property="errors",
-     *                 type="object",
-     *                 @OA\Property(
-     *                     property="name",
-     *                     type="array",
-     *                     @OA\Items(type="string", example="The name field is required.")
-     *                 ),
-     *                 @OA\Property(
-     *                     property="description",
-     *                     type="array",
-     *                     @OA\Items(type="string", example="The description field is required.")
-     *                 ),
-     *                 @OA\Property(
-     *                     property="status",
-     *                     type="array",
-     *                     @OA\Items(type="string", example="The selected status is invalid.")
-     *                 )
-     *             )
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthenticated",
-     *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 property="message",
-     *                 type="string",
-     *                 example="Unauthenticated."
-     *             )
-     *         )
-     *     ),
-     * )
+     * Create a new project
+     *
+     * Store a new project for the authenticated user.
+     *
+     * @bodyParam name string required The name of the project. Example: "My Project"
+     * @bodyParam description string The project description. Example: "A sample project"
+     * @bodyParam tags array List of tags. Example: ["php", "laravel"]
+     *
+     * @response 201 {
+     *   "success": true,
+     *   "message": "Project created successfully.",
+     *   "data": {...}
+     * }
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'tags' => 'nullable|array',
-            'github_url' => app()->environment('local') ? 'nullable|string' : 'nullable|url:https',
-            'status' => 'required|string|in:planning,active,paused,completed',
-        ]);
+        $validated = $request->validated();
 
         $validated['user_id'] = $request->user()->id;
         $project = Project::create($validated);
 
-        $responseData = $project->toArray();
-        $responseData['tags'] = $project->tags;
-
-        return response()->json(['success' => true, 'project' => $responseData], 201);
+        return (new ProjectResource($project))
+            ->additional([
+                'success' => true,
+                'message' => 'Project created successfully.',
+            ]);
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/v1/projects/{id}",
-     *     summary="Get a specific project",
-     *     tags={"Projects"},
-     *     security={{"bearerAuth":{}}},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Project retrieved successfully",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="project", type="object",
-     *                @OA\Property(property="id", type="integer", example=1),
-     *                @OA\Property(property="name", type="string", example="Project Name"),
-     *                @OA\Property(property="user_id", type="integer", example=1),
-     *                @OA\Property(property="description", type="string", example="Project Description"),
-     *                @OA\Property(
-     *                   property="tags",
-     *                   type="array",
-     *                   @OA\Items(type="string", example={"tag1", "tag2"})
-     *               ),
-     *                @OA\Property(property="github_url", type="string", example="https://github.com/TestUser/test-repo"),
-     *                @OA\Property(property="status", type="string", example="planning"),
-     *                @OA\Property(
-     *                   property="created_at",
-     *                  type="string",
-     *                  format="date-time"
-     *              ),
-     *               @OA\Property(
-     *                  property="updated_at",
-     *                 type="string",
-     *                format="date-time"
-     *            )
-     *           )
-     *        )
-     *    ),
-     *    @OA\Response(
-     *        response=404,
-     *       description="Project not found",
-     *       @OA\JsonContent(
-     *           @OA\Property(property="message", type="string", example="Project not found")
-     *       )
-     *   ),
-     *   @OA\Response(
-     *       response=401,
-     *      description="Unauthenticated",
-     *      @OA\JsonContent(
-     *          @OA\Property(
-     *              property="message",
-     *             type="string",
-     *             example="Unauthenticated."
-     *         )
-     *     )
-     *  )
-     * )
+     * Show a project
+     *
+     * Retrieve details of a specific project.
+     *
+     * @urlParam project int required The ID of the project.
+     *
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Project retrieved successfully.",
+     *   "data": {...}
+     * }
      */
     public function show(Project $project)
     {
-        $responseData = $project->toArray();
-        $responseData['tags'] = $project->tags;
-
-        return response()->json(['success' => true, 'project' => $responseData], 200);
+        return (new ProjectResource($project))
+            ->additional([
+                'success' => true,
+                'message' => 'Project retrieved successfully.',
+            ]);
     }
 
-   /**
-    * @OA\Put(
-    *     path="/api/v1/projects/{id}",
-    *     summary="Update a project",
-    *     tags={"Projects"},
-    *     security={{"bearerAuth":{}}},
-    *     @OA\Parameter(
-    *         name="id",
-    *         in="path",
-    *         required=true,
-    *         @OA\Schema(type="integer")
-    *     ),
-    *     @OA\RequestBody(
-    *         required=true,
-    *         @OA\JsonContent(
-    *             @OA\Property(property="name", type="string", example="Updated Project Name"),
-    *             @OA\Property(property="description", type="string", example="Updated Project Description"),
-    *             @OA\Property(property="tags", type="array", @OA\Items(type="string"), example={"tag1", "tag2"}),
-    *             @OA\Property(property="github_url", type="string", example="https://github.com/TestUser/updated-repo"),
-    *             @OA\Property(property="status", type="string", example="active"),
-    *             @OA\Property(property="user_id", type="integer", example=1),
-    *             @OA\Property(property="created_at", type="string", format="date-time", example="2023-10-01T12:00:00Z"),
-    *             @OA\Property(property="updated_at", type="string", format="date-time", example="2023-10-01T12:00:00Z")
-    *         )
-    *     ),
-    *     @OA\Response(
-    *         response=200,
-    *         description="Project updated successfully",
-    *         @OA\JsonContent(
-    *             @OA\Property(property="success", type="boolean", example=true),
-    *             @OA\Property(property="message", type="string", example="Project updated successfully."),
-    *             @OA\Property(property="project", type="object",
-    *                 @OA\Property(property="id", type="integer", example=1),
-    *                 @OA\Property(property="name", type="string", example="Updated Project Name"),
-    *                 @OA\Property(property="user_id", type="integer", example=1),
-    *                 @OA\Property(property="description", type="string", example="Updated Project Description"),
-    *                 @OA\Property(
-    *                     property="tags",
-    *                     type="array",
-    *                     @OA\Items(type="string", example={"tag1", "tag2"})
-    *                 ),
-    *                 @OA\Property(property="github_url", type="string", example="https://githyub.com/TestUser/updated-repo"),
-    *                 @OA\Property(property="status", type="string", example="active"),
-    *                 @OA\Property(
-    *                     property="created_at",
-    *                     type="string",
-    *                     format="date-time"
-    *                 ),
-    *                 @OA\Property(
-    *                     property="updated_at",
-    *                     type="string",
-    *                     format="date-time"
-    *                 )
-    *             )
-    *         )
-    *     ),
-    *     @OA\Response(
-    *         response=404,
-    *         description="Project not found",
-    *         @OA\JsonContent(
-    *             @OA\Property(property="message", type="string", example="Project not found")
-    *         )
-    *     ),
-    *     @OA\Response(
-    *         response=422,
-    *         description="Validation error",
-    *         @OA\JsonContent(
-    *             @OA\Property(property="message", type="string", example="The given data was invalid."),
-    *             @OA\Property(
-    *                 property="errors",
-    *                 type="object",
-    *                 @OA\Property(
-    *                     property="name",
-    *                     type="array",
-    *                     @OA\Items(type="string", example="The name field is required.")
-    *                 ),
-    *                 @OA\Property(
-    *                     property="description",
-    *                     type="array",
-    *                     @OA\Items(type="string", example="The description field is required.")
-    *                 ),
-    *                 @OA\Property(
-    *                     property="status",
-    *                     type="array",
-    *                     @OA\Items(type="string", example="The selected status is invalid.")
-    *                 )
-    *             )
-    *         )
-    *     ),
-    *     @OA\Response(
-    *         response=401,
-    *         description="Unauthenticated",
-    *         @OA\JsonContent(
-    *             @OA\Property(
-    *                 property="message",
-    *                 type="string",
-    *                 example="Unauthenticated."
-    *             )
-    *         )
-    *     )
-    * )
-    * )
-    */
-    public function update(Request $request, Project $project)
+    /**
+     * Update a project
+     *
+     * Update the details of a specific project.
+     *
+     * @urlParam project int required The ID of the project.
+     * @bodyParam name string The updated name. Example: "Updated Project"
+     * @bodyParam description string The updated description. Example: "Updated description"
+     * @bodyParam tags array List of tags. Example: ["api", "backend"]
+     *
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Project updated successfully.",
+     *   "data": {...}
+     * }
+     */
+    public function update(ProjectRequest $request, Project $project)
     {
-        $validated = $request->validate([ 
-            'name' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|required|string',
-            'tags' => 'nullable|array',
-            'github_url' => app()->environment('local') ? 'sometimes|nullable|string' : 'sometimes|nullable|url:https',
-            'status' => 'sometimes|required|string|in:planning,active,paused,completed',
-        ]);
+        $validated = $request->validated();
 
         if (isset($validated['tags']) && is_array($validated['tags']) && count($validated['tags']) === 1 && is_array($validated['tags'][0])) {
             $validated['tags'] = $validated['tags'][0];
@@ -363,51 +117,24 @@ class ProjectController extends Controller
 
         $project->update($validated);
 
-        $responseData = $project->fresh()->toArray();
-        $responseData['tags'] = $project->tags;
-
-        return response()->json(['success' => true, 'message' => 'Project updated successfully.', 'project' => $responseData], 200);
+        return (new ProjectResource($project))
+            ->additional([
+                'success' => true,
+                'message' => 'Project updated successfully.',
+            ]);
     }
 
     /**
-     * @OA\Delete(
-     *     path="/api/v1/projects/{id}",
-     *     summary="Delete a project",
-     *     tags={"Projects"},
-     *     security={{"bearerAuth":{}}},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Project deleted successfully",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Project deleted successfully.")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Project not found",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Project not found")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthenticated",
-     *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 property="message",
-     *                 type="string",
-     *                 example="Unauthenticated."
-     *             )
-     *         )
-     *     )
-     * )
+     * Delete a project
+     *
+     * Delete a specific project.
+     *
+     * @urlParam project int required The ID of the project.
+     *
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Project deleted successfully."
+     * }
      */
     public function destroy(Project $project)
     {

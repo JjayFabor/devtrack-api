@@ -20,13 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        config(['l5-swagger.defaults.constants.L5_SWAGGER_CONST_DOCS_URL' => 'docs/api-docs.json']);
-
-        View::composer('l5-swagger::index', function ($view) {
-            $view->with('urlsToDocs', [
-                config('l5-swagger.default.documentations.default.api.title', 'L5 Swagger UI')
-                    => url('docs/api-docs.json')
-            ]);
-        });
+        // Share the API key usage data with all views
+        // View::composer('*', function ($view) {
+        //     $apiKeyUsage = auth()->user() ? auth()->user()->apiKeys()->with('usage')->get() : null;
+        //     $view->with('apiKeyUsage', $apiKeyUsage);
+        // });
     }
 }

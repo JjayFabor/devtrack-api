@@ -10,12 +10,7 @@
 - [📦 Features](#-features)
 - [🧱 Tech Stack](#-tech-stack)
 - [🗂️ ER Diagram](#️-er-diagram)
-- [📁 Project Structure](#-project-structure)
-- [⚙️ Installation & Setup](#️-installation--setup)
 - [🔐 Authentication](#-authentication)
-- [📡 API Endpoints](#-api-endpoints)
-- [🧪 Testing](#-testing)
-- [📈 Future Enhancements](#-future-enhancements)
 - [🧑‍💻 Author](#-author)
 
 ---
