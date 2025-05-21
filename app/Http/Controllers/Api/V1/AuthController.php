@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
  */
 class AuthController extends Controller
 {
+
     /**
      * Register a new user
      *
@@ -45,7 +46,7 @@ class AuthController extends Controller
             'token' => $token,
         ], 201);
     }
-
+  
     /**
      * Log in a user
      *
@@ -95,7 +96,7 @@ class AuthController extends Controller
     {
         return response()->json(['success' => true, 'user' => $request->user()], 200);
     }
-
+  
     /**
      * Log out the authenticated user
      *
@@ -113,4 +114,3 @@ class AuthController extends Controller
 
         return response()->json(['success' => true, 'message' => 'User logged out successfully'], 200);
     }
-}
