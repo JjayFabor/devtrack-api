@@ -46,7 +46,7 @@ class AuthController extends Controller
             'token' => $token,
         ], 201);
     }
-
+  
     /**
      * Log in a user
      *
@@ -96,7 +96,6 @@ class AuthController extends Controller
     {
         return response()->json(['success' => true, 'user' => $request->user()], 200);
     }
-
     /**
      * Log out the authenticated user
      *

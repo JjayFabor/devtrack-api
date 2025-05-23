@@ -804,7 +804,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
+
 access-control-allow-origin: https://devtrack-api-production.up.railway.app
+
 access-control-allow-credentials: true
  </code></pre></details>         <pre>
 
@@ -2228,6 +2230,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>Example: <code>planning</code></p>
+
 Must be one of:
 <ul style="list-style-type: square;"><li><code>planning</code></li> <li><code>active</code></li> <li><code>paused</code></li> <li><code>completed</code></li></ul>
         </div>

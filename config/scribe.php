@@ -17,6 +17,7 @@ return [
     // The base URL displayed in the docs.
     // If you're using `laravel` type, you can set this to a dynamic string, like '{{ config("app.tenant_url") }}' to get a dynamic base URL.
     'base_url' => 'https://devtrack-api-production.up.railway.app',
+  
     // Routes to include in the docs
     'routes' => [
         [
@@ -84,6 +85,7 @@ return [
         'enabled' => true,
 
         // The base URL to use in the API tester. Leave as null to be the same as the displayed URL (`scribe.base_url`).
+
         'base_url' => 'https://devtrack-api-production.up.railway.app',
 
         // [Laravel Sanctum] Fetch a CSRF token before each request, and add it as an X-XSRF-TOKEN header.
