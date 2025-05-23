@@ -328,7 +328,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: completed
+        example: planning
         type: string
         enumValues:
           - planning
@@ -345,7 +345,7 @@ endpoints:
         - api
         - backend
       github_url: 'http://kunze.biz/iste-laborum-eius-est-dolor.html'
-      status: completed
+      status: planning
     fileParameters: []
     responses:
       -

@@ -96,7 +96,6 @@ class AuthController extends Controller
     {
         return response()->json(['success' => true, 'user' => $request->user()], 200);
     }
-  
     /**
      * Log out the authenticated user
      *
@@ -114,3 +113,4 @@ class AuthController extends Controller
 
         return response()->json(['success' => true, 'message' => 'User logged out successfully'], 200);
     }
+}
